@@ -28,8 +28,7 @@ const config: Config = {
           "900": "#1B2A61",
           "950": "#111A3E",
         },
-
-        "discord-background": "#2f3136",
+        "discord-background": "#36393f",
         "discord-brand-color": "#5865f2",
         "discord-gray": "#36393f",
         "discord-text": "#dcddde",

@@ -4,6 +4,8 @@ import Heading from "@/components/heading";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
 import ShinyButton from "@/components/shiny-button";
 import MockDiscordUI from "@/components/mock-discord-ui";
+import { AnimatedList } from "@/components/ui/animated-list";
+import DiscordMessage from "@/components/discord-message";
 
 const Page = () => {
   return (
@@ -63,7 +65,50 @@ const Page = () => {
         <div className="relative mx-auto ">
           <MaxWidthWrapper className="relative">
             <div className=" -m-2 rounded-xl bg-gray-900/5 p-2 ring-1  ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4 ">
-              <MockDiscordUI />
+              <MockDiscordUI>
+                <AnimatedList>
+                  <DiscordMessage
+                    avatarSrc="/brand-asset-profile-picture.png"
+                    avatarAlt="PandaProbe Avatar"
+                    username="PandaProbe"
+                    timestamp="Today at 11:35AM"
+                    badgeText="Sign Up"
+                    badgeColor="#43b581"
+                    title="👤 New User Signed Up"
+                    content={{
+                      name: "John Doe",
+                      email: "johndoe@email.com",
+                    }}
+                  />
+                  <DiscordMessage
+                    avatarSrc="/brand-asset-profile-picture.png"
+                    avatarAlt="PandaProbe Avatar"
+                    username="PandaProbe"
+                    timestamp="Today at 11:50AM "
+                    badgeText="Sale"
+                    badgeColor="#faa61a"
+                    title="💸 New Sale"
+                    content={{
+                      product: "PandaProbe Pro",
+                      email: "johndoe@email.com",
+                      price: "$99",
+                    }}
+                  />
+                  <DiscordMessage
+                    avatarSrc="/brand-asset-profile-picture.png"
+                    avatarAlt="PandaProbe Avatar"
+                    username="PandaProbe"
+                    timestamp="Today at 02:00PM "
+                    badgeText="Milestone"
+                    badgeColor="#5865f2"
+                    title="🎉 100th Sale achieved"
+                    content={{
+                      recurringRevenue: "$10000",
+                      growth: "10%",
+                    }}
+                  />
+                </AnimatedList>
+              </MockDiscordUI>
             </div>
           </MaxWidthWrapper>
         </div>
