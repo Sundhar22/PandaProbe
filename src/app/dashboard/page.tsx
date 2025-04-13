@@ -7,8 +7,13 @@ import { DashboardPageContent } from "./dashboard-page-content";
 import CreateEventCategory from "@/components/create-event-category";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { creatCheckoutSession } from "@/lib/stripe";
+import { PaymentSuccessModal } from "@/components/payment-success";
 
-const Page = async () => {
+interface PageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+const Page = async ({ searchParams }: PageProps) => {
   const user = await currentUser();
   if (!user) {
     redirect("/sign-in");
@@ -20,15 +25,37 @@ const Page = async () => {
   });
 
   if (!dbUser) {
+    return redirect("/welcome")
+  }
+
+  const resolvedSearchParams = await searchParams;
+
+  const intent = resolvedSearchParams.intent;
+
+  if (intent === "upgrade") {
+    const session = await creatCheckoutSession({
+      userEmail: dbUser.email,
+      userId: dbUser.id,
+    })
+
+    if (session.url) redirect(session.url)
+  }
+
+  const success = resolvedSearchParams.success;
+  if (!dbUser) {
     redirect("/sign-up");
   }
-  return <DashboardPage cta={<CreateEventCategory>
-    <Button> <Plus className=
-      "size-4 mr-2"
-    /> New Category</Button>
-  </CreateEventCategory>} title="Dashboard">
-    <DashboardPageContent />
-  </DashboardPage>;
+  return <>
+
+    {success ? <PaymentSuccessModal /> : null}
+    <DashboardPage cta={<CreateEventCategory>
+      <Button> <Plus className=
+        "size-4 mr-2"
+      /> New Category</Button>
+    </CreateEventCategory>} title="Dashboard">
+      <DashboardPageContent />
+    </DashboardPage>;
+  </>
 };
 
 export default Page;

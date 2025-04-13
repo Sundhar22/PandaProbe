@@ -135,7 +135,7 @@ const MockDiscordUI = ({ children }: PropsWithChildren) => {
               />
               <div className="absolute bottom-0 right-2 w-4 size-3 h-4 bg-green-500 border-2 border-[#36393f] rounded-full"></div>
             </div>
-            <p className="font-semibold text-white">PingProbe</p>
+            <p className="font-semibold text-white">PandaProbe</p>
           </div>
           <div className="ml-auto flex items-center space-x-4 text-[#b9bbbe]">
             <Phone className="size-5 hover:text-white cursor-not-allowed hidden sm:block" />

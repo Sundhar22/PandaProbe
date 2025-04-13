@@ -2,17 +2,15 @@ import { DashboardPage } from "@/components/dashboard-page"
 import { db } from "@/db"
 import { currentUser } from "@clerk/nextjs/server"
 import { notFound } from "next/navigation"
-import CategoryPageContent from "./category-page-content"
+import { CategoryPageContent } from "./category-page-content"
 
 
-interface PageProps {
-  params: {
-    name?: string | string[]
-  }
+interface PageParams {
+  name: string;
 }
-
-const Page = async ({ params }: PageProps) => {
-  if (typeof params.name !== "string") return notFound()
+const Page = async ({ params }: { params: Promise<PageParams> }) => {
+  const { name } = await params;
+  if (typeof name !== "string") return notFound()
 
   const auth = await currentUser()
   if (!auth) return notFound()
@@ -25,7 +23,7 @@ const Page = async ({ params }: PageProps) => {
   const category = await db.eventCategory.findUnique({
     where: {
       name_userId: {
-        name: params.name,
+        name: name,
         userId: user.id,
       },
     },

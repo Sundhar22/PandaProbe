@@ -236,7 +236,7 @@ const Page = () => {
                     Easy Integration
                   </p>
                   <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                    Connect PingPanda with your existing workflows in minutes
+                    Connect PandaProbe with your existing workflows in minutes
                     and call our intuitive logging API from any language.
                   </p>
                 </div>
