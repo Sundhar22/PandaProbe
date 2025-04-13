@@ -1,7 +1,7 @@
 import { AppType } from "@/server"
 import { hc } from "hono/client"
 import { HTTPException } from "hono/http-exception"
-import { StatusCode } from "hono/utils/http-status"
+import { ContentfulStatusCode } from "hono/utils/http-status"
 import superjson from "superjson"
 
 const getBaseUrl = () => {
@@ -28,12 +28,12 @@ export const baseClient = hc<AppType>(getBaseUrl(), {
   fetch: async (input: RequestInfo | URL, init?: RequestInit) => {
     const response = await fetch(input, { ...init, cache: "no-store" })
 
-    if (!response.ok) {
-      throw new HTTPException(response.status as StatusCode, {
-        message: response.statusText,
-        res: response,
-      })
-    }
+if (!response.ok) {
+  throw new HTTPException(response.status as ContentfulStatusCode, {
+    message: response.statusText,
+    res: response,
+  })
+}
 
     const contentType = response.headers.get("Content-Type")
 
