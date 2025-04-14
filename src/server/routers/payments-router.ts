@@ -1,8 +1,7 @@
-import { router } from "../__internals/router";
-import { privateProcedure } from "../procedures";
 import { creatCheckoutSession } from "@/lib/stripe";
+import { j, privateProcedure } from "../jstack";
 
-export const paymentsRouter = router({
+export const paymentsRouter = j.router({
   createCheckoutSession: privateProcedure.mutation(async ({ c, ctx }) => {
     const { user } = ctx
 

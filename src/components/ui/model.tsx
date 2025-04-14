@@ -28,7 +28,7 @@ export const Modal = ({
       return
     }
 
-    onClose?.() 
+    onClose?.()
 
     if (setShowModal) {
       setShowModal(false)
@@ -57,7 +57,7 @@ export const Modal = ({
           >
             {/* Added Drawer.Title for accessibility */}
             <Drawer.Title className="sr-only">Dialog</Drawer.Title>
-            
+
             <div className="sticky top-0 z-20 flex w-full items-center justify-center rounded-t-[10px] bg-inherit">
               <div className="my-3 h-1 w-12 rounded-full bg-gray-300" />
             </div>
@@ -79,7 +79,7 @@ export const Modal = ({
       }}
     >
       <DialogTitle className="sr-only">Dialog</DialogTitle>
-      <DialogContent className={cn("bg-white",className)}>{children}</DialogContent>
+      <DialogContent className={cn("bg-white", className)}>{children}</DialogContent>
     </Dialog>
   )
 }

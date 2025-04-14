@@ -14,8 +14,8 @@ const eb_garamond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "jStack App",
-  description: "Created using jStack",
+  title: "PandaProbe",
+  description: "PandaProbe is a free and open source tool that allows you to monitor your Discord server in real-time.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

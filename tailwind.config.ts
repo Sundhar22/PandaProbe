@@ -1,5 +1,5 @@
-import type { Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
+import type { Config } from "tailwindcss"
+import { fontFamily } from "tailwindcss/defaultTheme"
 
 const config: Config = {
   darkMode: ["class"],
@@ -29,7 +29,7 @@ const config: Config = {
           "950": "#111A3E",
         },
         "discord-background": "#36393f",
-        "discord-brand-color": "#5865f2",
+		"discord-brand-color": "#5865f2",
         "discord-gray": "#36393f",
         "discord-text": "#dcddde",
         "discord-timestamp": "#72767d",
@@ -82,5 +82,5 @@ const config: Config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-};
-export default config;
+}
+export default config

@@ -1,12 +1,11 @@
 import { db } from "@/db";
-import { router } from "../__internals/router";
-import { privateProcedure } from "../procedures";
 import { startOfDay, startOfMonth, startOfWeek } from "date-fns";
 import { promise, z } from "zod";
 import { CATEGORY_COLOR_VALIDATOR, CATEGORY_EMOJI_VALIDATOR, CATEGORY_NAME_VALIDATOR } from "@/lib/validators";
 import { parseColorInt } from "@/utils";
 import { HTTPException } from "hono/http-exception";
-export const categoryRouter = router({
+import { j, privateProcedure } from "../jstack";
+export const categoryRouter = j.router({
   getEventCategories: privateProcedure.query(async ({ c, ctx }) => {
     const now = new Date();
     const firstDayOfMonth = startOfMonth(now);

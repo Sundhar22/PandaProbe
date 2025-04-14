@@ -2,10 +2,9 @@ import { PRO_QUOTA, FREE_QUOTA } from "@/config"
 import { db } from "@/db"
 import { startOfMonth, addMonths } from "date-fns"
 import { z } from "zod"
-import { privateProcedure } from "../procedures"
-import { router } from "../__internals/router"
+import { j, privateProcedure } from "../jstack"
 
-export const projectRouter = router({
+export const projectRouter = j.router({
   getUsage: privateProcedure.query(async ({ c, ctx }) => {
     const { user } = ctx
 

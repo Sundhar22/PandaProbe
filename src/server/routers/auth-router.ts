@@ -1,11 +1,10 @@
 import { db } from "@/db";
 import { currentUser } from "@clerk/nextjs/server";
-import { router } from "../__internals/router";
-import { publicProcedure } from "../procedures";
+import { j, publicProcedure } from "../jstack";
 
 export const dynamic = "force-dynamic";
 
-export const authRouter = router({
+export const authRouter = j.router({
   getDatabaseSyncStatus: publicProcedure.query(async ({ c }) => {
     const auth = await currentUser();
 
@@ -17,14 +16,14 @@ export const authRouter = router({
       where: { externalId: auth.id },
     });
 
-    console.log("USER IN DB:", user);
+
 
     if (!user) {
       await db.user.create({
         data: {
           quotaLimit: 100,
           externalId: auth.id,
-          email: auth.emailAddresses[0].emailAddress,
+          email: auth.emailAddresses[0]?.emailAddress ?? "",
         },
       });
     }

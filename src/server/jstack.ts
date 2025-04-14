@@ -1,7 +1,23 @@
-import { HTTPException } from "hono/http-exception";
-import { j } from "./__internals/j";
 import { db } from "@/db";
 import { currentUser } from "@clerk/nextjs/server";
+import { HTTPException } from "hono/http-exception";
+import { jstack } from "jstack"
+
+interface Env {
+  Bindings: {
+    DATABASE_URL: string,
+    DISCORD_BOT_TOKEN: string,
+    NEXT_PUBLIC_URL: string,
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: string,
+    CLERK_SECRET_KEY: string,
+    STRIPE_SECRET_KEY: string,
+
+  }
+}
+
+
+
+export const j = jstack.init<Env>()
 
 const authMiddleware = j.middleware(async ({ c, next }) => {
   const authHeader = c.req.header("Authorization");

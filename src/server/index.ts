@@ -1,30 +1,32 @@
-import { Hono } from "hono";
-import { cors } from "hono/cors";
-import { handle } from "hono/vercel";
-import { authRouter } from "./routers/auth-router";
-import { categoryRouter } from "./routers/categoryRouter";
-import { paymentsRouter } from "./routers/payments-router";
-import { projectRouter } from "./routers/project-router";
-
-const app = new Hono().basePath("/api").use(cors());
+import { j } from "./jstack"
+import { authRouter } from "./routers/auth-router"
+import { categoryRouter } from "./routers/categoryRouter"
+import { paymentsRouter } from "./routers/payments-router"
+import { projectRouter } from "./routers/project-router"
 
 /**
- * This is the primary router for your server.
+ * This is your base API.
+ * Here, you can handle errors, not-found responses, cors and more.
  *
- * All routers added in /server/routers should be manually added here.
+ * @see https://jstack.app/docs/backend/app-router
  */
-const appRouter = app.route("/auth", authRouter).route('/category', categoryRouter).route('/payment', paymentsRouter).route('/project', projectRouter);
-
-// The handler Next.js uses to answer API requests
-export const httpHandler = handle(app);
+const api = j
+  .router()
+  .basePath("/api")
+  .use(j.defaults.cors)
+  .onError(j.defaults.errorHandler)
 
 /**
- * (Optional)
- * Exporting our API here for easy deployment
- *
- * Run `npm run deploy` for one-click API deployment to Cloudflare's edge network
+ * This is the main router for your server.
+ * All routers in /server/routers should be added here manually.
  */
-export default app;
+const appRouter = j.mergeRouters(api, {
+  auth: authRouter,
+  category: categoryRouter,
+  payment: paymentsRouter,
+  project: projectRouter
+})
 
-// export type definition of API
-export type AppType = typeof appRouter;
+export type AppRouter = typeof appRouter
+
+export default appRouter

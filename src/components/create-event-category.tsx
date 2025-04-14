@@ -14,7 +14,7 @@ import { Modal } from "./ui/model"
 
 const EVENT_CATEGORY_VALIDATOR = z.object({
   name: CATEGORY_NAME_VALIDATOR,
-  color:CATEGORY_COLOR_VALIDATOR ,
+  color: CATEGORY_COLOR_VALIDATOR,
   emoji: CATEGORY_EMOJI_VALIDATOR,
 
 })
@@ -26,7 +26,7 @@ type EventCategoryForm = z.infer<typeof EVENT_CATEGORY_VALIDATOR>
 interface CreateEventCategoryModel extends PropsWithChildren {
   containerClassName?: string
 }
-const CreateEventCategory = ({children, containerClassName}:CreateEventCategoryModel) => {
+const CreateEventCategory = ({ children, containerClassName }: CreateEventCategoryModel) => {
   const [isOpen, setIsOpen] = useState(false)
   const queryClient = useQueryClient()
 
@@ -57,7 +57,7 @@ const CreateEventCategory = ({children, containerClassName}:CreateEventCategoryM
       setIsOpen(false)
     },
   })
-  
+
   const onSubmit = (data: EventCategoryForm) => {
     createEventCategory(data)
   }
@@ -87,112 +87,112 @@ const CreateEventCategory = ({children, containerClassName}:CreateEventCategoryM
     { emoji: "🔔", label: "Notification" },
   ]
   return (
-   <>
+    <>
       <div className={containerClassName} onClick={() => setIsOpen(true)}>
         {children}
       </div>
-      
-    <Modal
-      className="max-w-xl p-8"
-      showModal={isOpen}
-      setShowModal={setIsOpen}
-    >
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div>
-          <h2 className="text-lg/7 font-medium tracking-tight text-gray-950">
-            New Event Category
-          </h2>
-          <p className="text-sm/6 text-gray-600">
-            Create a new category to organize your events.
-          </p>
-        </div>
 
-        <div className="space-y-5">
+      <Modal
+        className="max-w-xl p-8"
+        showModal={isOpen}
+        setShowModal={setIsOpen}
+      >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
-            <Label htmlFor="name">Name</Label>
-            <Input
-              autoFocus
-              id="name"
-              {...register("name")}
-              placeholder="e.g. user-signup"
-              className="w-full"
-            />
-            {errors.name ? (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.name.message}
-              </p>
-            ) : null}
+            <h2 className="text-lg/7 font-medium tracking-tight text-gray-950">
+              New Event Category
+            </h2>
+            <p className="text-sm/6 text-gray-600">
+              Create a new category to organize your events.
+            </p>
           </div>
 
-          <div>
-            <Label>Color</Label>
-            <div className="flex flex-wrap gap-3">
-              {COLOR_OPTIONS.map((premadeColor) => (
-                <button
-                  key={premadeColor}
-                  type="button"
-                  className={cn(
-                    `bg-[${premadeColor}]`,
-                    "size-10 rounded-full ring-2 ring-offset-2 transition-all",
-                    color === premadeColor
-                      ? "ring-brand-700 scale-110"
-                      : "ring-transparent hover:scale-105"
-                  )}
-                  onClick={() => setValue("color", premadeColor)}
-                ></button>
-              ))}
+          <div className="space-y-5">
+            <div>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                autoFocus
+                id="name"
+                {...register("name")}
+                placeholder="e.g. user-signup"
+                className="w-full"
+              />
+              {errors.name ? (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.name.message}
+                </p>
+              ) : null}
             </div>
 
-            {errors.color ? (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.color.message}
-              </p>
-            ) : null}
-          </div>
+            <div>
+              <Label>Color</Label>
+              <div className="flex flex-wrap gap-3">
+                {COLOR_OPTIONS.map((premadeColor) => (
+                  <button
+                    key={premadeColor}
+                    type="button"
+                    className={cn(
+                      `bg-[${premadeColor}]`,
+                      "size-10 rounded-full ring-2 ring-offset-2 transition-all",
+                      color === premadeColor
+                        ? "ring-brand-700 scale-110"
+                        : "ring-transparent hover:scale-105"
+                    )}
+                    onClick={() => setValue("color", premadeColor)}
+                  ></button>
+                ))}
+              </div>
 
-          <div>
-            <Label>Emoji</Label>
-            <div className="flex flex-wrap gap-3">
-              {EMOJI_OPTIONS.map(({ emoji}) => (
-                <button
-                  key={emoji}
-                  type="button"
-                  className={cn(
-                    "size-10 flex items-center justify-center text-xl rounded-md transition-all",
-                    selectedEmoji === emoji
-                      ? "bg-brand-100 ring-2 ring-brand-700 scale-110"
-                      : "bg-brand-100 hover:bg-brand-200"
-                  )}
-                  onClick={() => setValue("emoji", emoji)}
-                >
-                  {emoji}
-                </button>
-              ))}
+              {errors.color ? (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.color.message}
+                </p>
+              ) : null}
             </div>
 
-            {errors.emoji ? (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.emoji.message}
-              </p>
-            ) : null}
-          </div>
-        </div>
+            <div>
+              <Label>Emoji</Label>
+              <div className="flex flex-wrap gap-3">
+                {EMOJI_OPTIONS.map(({ emoji }) => (
+                  <button
+                    key={emoji}
+                    type="button"
+                    className={cn(
+                      "size-10 flex items-center justify-center text-xl rounded-md transition-all",
+                      selectedEmoji === emoji
+                        ? "bg-brand-100 ring-2 ring-brand-700 scale-110"
+                        : "bg-brand-100 hover:bg-brand-200"
+                    )}
+                    onClick={() => setValue("emoji", emoji)}
+                  >
+                    {emoji}
+                  </button>
+                ))}
+              </div>
 
-        <div className="flex justify-end space-x-3 pt-4 border-t">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => setIsOpen(false)}
-          >
-            Cancel
-          </Button>
-          <Button disabled={isPending} type="submit">
-            {isPending ? "Creating..." : "Create Category"}{" "}
-          </Button>
-        </div>
-      </form>
-    </Modal>
-    </> 
+              {errors.emoji ? (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.emoji.message}
+                </p>
+              ) : null}
+            </div>
+          </div>
+
+          <div className="flex justify-end space-x-3 pt-4 border-t">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setIsOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button disabled={isPending} type="submit">
+              {isPending ? "Creating..." : "Create Category"}{" "}
+            </Button>
+          </div>
+        </form>
+      </Modal>
+    </>
   )
 }
 
