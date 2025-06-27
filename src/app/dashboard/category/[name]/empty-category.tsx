@@ -32,7 +32,7 @@ export const EmptyCategoryState = ({ categoryName }: CatoryPageContentProps) => 
     }
   }, [data, route])
 
-  const codeSnippet = `await fetch('https://panda-probe.vercel.app/api/events', {
+  const codeSnippet = `await fetch('https://panda-probe.vercel.app/api/v1/events', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY'
