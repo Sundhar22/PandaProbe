@@ -80,7 +80,13 @@ npm run dev
 bun dev
 ```
 
-## 📹 Demo Video
+## 
+
+
+
+📹 Demo Video
+
+[Watch the PandaProbe Demo Video](https://github.com/user-attachments/assets/1387374e-d9d1-4a07-a288-061053d97446)
 
 For a comprehensive overview of PandaProbe's features and functionality, please refer to the attached demo video. The video demonstrates:
 
